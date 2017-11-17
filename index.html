@@ -5,38 +5,38 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
 		<title></title>
 		<link rel="stylesheet" href="css/index.css" />
+		<script type="text/javascript" src="js/zepto.js" ></script>
+		<script type="text/javascript" src="js/touch.js" ></script>
 	</head>
 	<body>
 		<div id="box">
-				<img src="img/1.jpg"/>
-				<img src="img/2.jpg"/>
-				<img src="img/3.jpg"/>
-				<img src="img/4.jpg"/>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
 		</div>
 	</body>
 	<script type="text/javascript">
-		var box=document.getElementById("box");
-		var imgs=document.getElementsByTagName("img")
-		var w=innerWidth;
-		box.addEventListener("touchstart",function(even){
-			even.preventDefault();
-			var posLeft=this.offsetLeft;
-			var ex=even.changedTouches[0].pageX;
-		box.addEventListener("touchmove",function(even){
-			var dis=even.changedTouches[0].pageX-ex;
-			box.style.left=(posLeft+dis)+"px";
-		 });
-		box.addEventListener("touchend",function(even){
-			var n=Math.round(box.offsetLeft/w);
-			if(n<=-(imgs.length-1)){
-				n=-(imgs.length-1);
+		
+		var n=0;
+		$('#box').on("swipeLeft",function(ev){
+			ev.preventDefault();
+			n++;
+			console.log(n)
+			if(n==$('#box div').length){
+				n=$('#box div').length-1;
 			}
-			if(n>0){
+			console.log(n)
+			$('#box').css("transform","translate3d(-"+n*innerWidth+"px,0,0)");
+		});
+		$('#box').on("swipeRight",function(ev){
+			ev.preventDefault();
+			n--;
+			if(n<0){
 				n=0;
 			}
-			box.style.left=n*w+"px";
-			
+			$('#box').css("transform","translate3d(-"+n*innerWidth+"px,0,0)");
 		});
-		});
+		
 	</script>
 </html>
