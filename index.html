@@ -10,27 +10,26 @@
 	</head>
 	<body>
 		<div id="box">
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
+			<img src="img/1.jpg"/>
+			<img src="img/2.jpg"/>
+			<img src="img/3.jpg"/>
+			<img src="img/4.jpg"/>
 		</div>
 	</body>
 	<script type="text/javascript">
-		
-		var n=0;
-		$('#box').on("swipeLeft",function(ev){
+		var box=document.getElementById("box");
+		box.addEventListener('touchstart',function(ev){
 			ev.preventDefault();
+		});
+		var n=0;
+		$('#box').on("swipeLeft",function(){
 			n++;
-			console.log(n)
-			if(n==$('#box div').length){
-				n=$('#box div').length-1;
+			if(n==$('#box img').length){
+				n=$('#box img').length-1;
 			}
-			console.log(n)
 			$('#box').css("transform","translate3d(-"+n*innerWidth+"px,0,0)");
 		});
-		$('#box').on("swipeRight",function(ev){
-			ev.preventDefault();
+		$('#box').on("swipeRight",function(){
 			n--;
 			if(n<0){
 				n=0;
